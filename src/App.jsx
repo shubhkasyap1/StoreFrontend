@@ -16,75 +16,111 @@ import Stores from "./pages/stores/Stores";
 import Account from "./pages/account/Account";
 
 const App = () => {
-  return (
-    <BrowserRouter>
-      <AuthProvider>
-        <Routes>
+    return (
+        <BrowserRouter>
+            <AuthProvider>
+                <Routes>
 
-          {/* ==================== PUBLIC ROUTES ==================== */}
+                    {/* =========================================
+                        PUBLIC ROUTES
+                    ========================================= */}
 
-          <Route path="/" element={<Home />} />
+                    <Route
+                        path="/"
+                        element={<Home />}
+                    />
 
-          <Route path="/login" element={<Login />} />
+                    <Route
+                        path="/login"
+                        element={<Login />}
+                    />
 
-          <Route
-            path="/unauthorized"
-            element={<Unauthorized />}
-          />
-
-
-          {/* ==================== AUTHENTICATED ROUTES ==================== */}
-
-          <Route element={<ProtectedRoute />}>
-
-            {/* Account - accessible to ALL logged-in users */}
-            <Route
-              path="/account"
-              element={<Account />}
-            />
-
-            {/* Stores - accessible to ALL logged-in users */}
-            <Route
-              path="/stores"
-              element={<Stores />}
-            />
+                    <Route
+                        path="/unauthorized"
+                        element={<Unauthorized />}
+                    />
 
 
-            {/* ==================== ADMIN ==================== */}
+                    {/* =========================================
+                        PROTECTED ROUTES
+                    ========================================= */}
 
-            <Route element={<RoleRoute allowedRoles={["ADMIN"]} />}>
-              <Route
-                path="/admin"
-                element={<AdminDashboard />}
-              />
-            </Route>
+                    <Route element={<ProtectedRoute />}>
+
+                        {/* -----------------------------------------
+                            All authenticated users
+                        ----------------------------------------- */}
+
+                        <Route
+                            path="/account"
+                            element={<Account />}
+                        />
+
+                        <Route
+                            path="/stores"
+                            element={<Stores />}
+                        />
 
 
-            {/* ==================== USER ==================== */}
+                        {/* -----------------------------------------
+                            ADMIN
+                        ----------------------------------------- */}
 
-            <Route element={<RoleRoute allowedRoles={["USER"]} />}>
-              <Route
-                path="/user"
-                element={<UserDashboard />}
-              />
-            </Route>
+                        <Route
+                            element={
+                                <RoleRoute
+                                    allowedRoles={["ADMIN"]}
+                                />
+                            }
+                        >
+                            <Route
+                                path="/admin"
+                                element={<AdminDashboard />}
+                            />
+                        </Route>
 
 
-            {/* ==================== STORE OWNER ==================== */}
+                        {/* -----------------------------------------
+                            USER
+                        ----------------------------------------- */}
 
-            <Route element={<RoleRoute allowedRoles={["STORE_OWNER"]} />}>
-              <Route
-                path="/owner"
-                element={<OwnerDashboard />}
-              />
-            </Route>
+                        <Route
+                            element={
+                                <RoleRoute
+                                    allowedRoles={["USER"]}
+                                />
+                            }
+                        >
+                            <Route
+                                path="/user"
+                                element={<UserDashboard />}
+                            />
+                        </Route>
 
-          </Route>
 
-        </Routes>
-      </AuthProvider>
-    </BrowserRouter>
-  );
+                        {/* -----------------------------------------
+                            STORE OWNER
+                        ----------------------------------------- */}
+
+                        <Route
+                            element={
+                                <RoleRoute
+                                    allowedRoles={["STORE_OWNER"]}
+                                />
+                            }
+                        >
+                            <Route
+                                path="/owner"
+                                element={<OwnerDashboard />}
+                            />
+                        </Route>
+
+                    </Route>
+
+                </Routes>
+            </AuthProvider>
+        </BrowserRouter>
+    );
 };
 
 export default App;

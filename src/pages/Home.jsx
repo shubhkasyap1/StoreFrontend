@@ -30,13 +30,18 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-[#faf9f5] text-slate-800">
-      {/* Main container */}
       <div className="mx-auto max-w-[1060px] px-6">
 
-        {/* Navbar */}
+        {/* =========================
+            Navbar
+        ========================= */}
         <header className="flex h-[84px] items-center justify-between">
+
           {/* Logo */}
-          <div className="flex items-center gap-2.5">
+          <Link
+            to="/"
+            className="flex items-center gap-2.5"
+          >
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#ee922c]">
               <Store
                 size={19}
@@ -45,23 +50,26 @@ const Home = () => {
               />
             </div>
 
-            <span className="text-[20px] font-semibold tracking-[-0.3px]">
+            <span className="text-[20px] font-semibold tracking-[-0.3px] text-[#172333]">
               Storefront
             </span>
-          </div>
+          </Link>
 
           {/* Sign in */}
-          <button
-            type="button"
+          <Link
+            to="/login"
             className="rounded-xl bg-[#203953] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#172d45]"
           >
             Sign in
-          </button>
+          </Link>
         </header>
 
-        {/* Hero */}
+        {/* =========================
+            Hero
+        ========================= */}
         <main>
           <section className="pt-[64px]">
+
             {/* Small heading */}
             <p className="mb-4 text-[16px] font-medium text-[#ed861e]">
               Store ratings platform
@@ -81,24 +89,31 @@ const Home = () => {
 
             {/* CTA */}
             <div className="mt-9 flex items-center gap-3">
-              <Link
-  to="/auth"
-  className="rounded-xl bg-[#203953] px-9 py-3.5 text-[15px] font-semibold text-white shadow-sm transition hover:bg-[#172d45]"
->
-  Create an account
-</Link>
 
-<Link
-  to="/auth"
-  className="rounded-xl border border-[#dedbd3] bg-white px-9 py-3.5 text-[15px] font-medium text-slate-800 shadow-sm transition hover:bg-[#f7f6f2]"
->
-  Sign in
-</Link>
+              {/* Create account */}
+              <Link
+                to="/login"
+                className="rounded-xl bg-[#203953] px-9 py-3.5 text-[15px] font-semibold text-white shadow-sm transition hover:bg-[#172d45]"
+              >
+                Create an account
+              </Link>
+
+              {/* Sign in */}
+              <Link
+                to="/login"
+                className="rounded-xl border border-[#dedbd3] bg-white px-9 py-3.5 text-[15px] font-medium text-slate-800 shadow-sm transition hover:bg-[#f7f6f2]"
+              >
+                Sign in
+              </Link>
+
             </div>
           </section>
 
-          {/* Feature cards */}
+          {/* =========================
+              Feature Cards
+          ========================= */}
           <section className="mt-[72px] grid grid-cols-1 gap-4 pb-16 md:grid-cols-3">
+
             {features.map((feature) => {
               const Icon = feature.icon;
 
@@ -128,6 +143,7 @@ const Home = () => {
                 </div>
               );
             })}
+
           </section>
         </main>
       </div>

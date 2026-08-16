@@ -12,15 +12,67 @@ const Header = () => {
         navigate("/login", { replace: true });
     };
 
+    /*
+     * Authentication pages
+     *
+     * Login.jsx contains both:
+     * - Login
+     * - Sign up
+     *
+     * So we only need to check /login here.
+     */
+    const isAuthPage = location.pathname === "/login";
+
+    /*
+     * Simple header for Login / Register
+     */
+    if (isAuthPage) {
+        return (
+            <header className="border-b border-[#e5e1d8] bg-[#faf9f5]">
+                <div className="mx-auto flex h-[68px] max-w-[1055px] items-center px-6">
+                    <div className="flex items-center gap-3">
+                        {/* Logo */}
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f2a033]">
+                            <Store
+                                size={21}
+                                strokeWidth={2.2}
+                                className="text-[#17263a]"
+                            />
+                        </div>
+
+                        {/* Brand */}
+                        <div>
+                            <h1 className="text-[21px] font-semibold leading-tight tracking-tight text-[#17263a]">
+                                Storefront
+                            </h1>
+
+                            <p className="text-[13px] leading-tight text-[#737b88]">
+                                Store ratings platform
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        );
+    }
+
+    /*
+     * Role
+     */
     const role = user?.role;
 
+    /*
+     * Role labels
+     */
     const roleLabel = {
         ADMIN: "System Administrator",
         STORE_OWNER: "Store Owner",
         USER: "Normal User",
     };
 
-    // Dashboard route according to role
+    /*
+     * Dashboard route according to role
+     */
     const dashboardPath =
         role === "ADMIN"
             ? "/admin"
@@ -28,6 +80,9 @@ const Header = () => {
                 ? "/owner"
                 : "/user";
 
+    /*
+     * Active navigation states
+     */
     const isDashboardActive =
         location.pathname === dashboardPath ||
         location.pathname.startsWith(`${dashboardPath}/`);
@@ -44,13 +99,19 @@ const Header = () => {
         <header className="border-b border-[#e5e1d8] bg-[#faf9f5]">
             <div className="mx-auto flex h-[68px] max-w-[1055px] items-center justify-between px-6">
 
-                {/* Logo */}
+                {/* =========================================
+                    Logo
+                ========================================= */}
                 <div
                     className="flex cursor-pointer items-center gap-3"
-                    onClick={() => navigate(dashboardPath)}
+                    onClick={() => navigate("/")}
                 >
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f2a033]">
-                        <Store size={21} strokeWidth={2.2} />
+                        <Store
+                            size={21}
+                            strokeWidth={2.2}
+                            className="text-[#17263a]"
+                        />
                     </div>
 
                     <span className="text-[21px] font-semibold tracking-tight text-[#17263a]">
@@ -58,7 +119,9 @@ const Header = () => {
                     </span>
                 </div>
 
-                {/* Navigation */}
+                {/* =========================================
+                    Navigation
+                ========================================= */}
                 <nav className="ml-7 flex flex-1 items-center gap-1">
 
                     {/* Dashboard */}
@@ -102,9 +165,12 @@ const Header = () => {
 
                 </nav>
 
-                {/* User Info + Logout */}
+                {/* =========================================
+                    User Info + Logout
+                ========================================= */}
                 <div className="flex items-center gap-4">
 
+                    {/* User Information */}
                     <div className="text-right">
                         <p className="text-[15px] font-medium text-[#17263a]">
                             {user?.name || "User"}
