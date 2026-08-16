@@ -5,9 +5,11 @@ A full-stack **Store Rating Platform** where users can discover stores, submit r
 Built with **React.js, Tailwind CSS, Express.js, PostgreSQL, Prisma, and JWT Authentication**.
 
 ## 🚀 Live Demo
+⚠️ Note: The backend is hosted on Render's free tier and may go to sleep when inactive.
+Please wait 5–10 minutes for the server to wake up when accessing the application for the first time or after a period of inactivity.
 
 * **Frontend:** https://storeratingplatform.netlify.app/
-* **Backend API:** https://backend-rating.onrender.com
+* **Backend API:** https://backend-rating.onrender.com/api/health
 * **Swagger API Documentation:** https://backend-rating.onrender.com/api-docs/swagger.json#/
 
 ---
